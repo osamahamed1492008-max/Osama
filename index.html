@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة أسامة حامد</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            background-color: #050b05;
+            color: #00ff66;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .terminal-box {
+            border: 2px solid #00ff66;
+            padding: 25px;
+            border-radius: 8px;
+            background: #0a120a;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
+            max-width: 420px;
+            width: 100%;
+        }
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #00aa44;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #00aa44;
+            padding-bottom: 8px;
+        }
+        .dots span {
+            color: #ff3333;
+        }
+        h1 {
+            color: #00ff66;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(0,255,102,0.4);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #00aa44;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: #050b05;
+            border: 1px solid #00aa44;
+            color: #00ff66;
+            text-align: center;
+            border-radius: 4px;
+            outline: none;
+            font-size: 1rem;
+        }
+        input[type="text"]:focus {
+            border-color: #00ff66;
+            box-shadow: 0 0 10px rgba(0,255,102,0.3);
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #00aa44;
+            color: #050b05;
+            border: none;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #00ff66;
+            box-shadow: 0 0 15px rgba(0,255,102,0.5);
+        }
+        #error-msg {
+            color: #ff4444;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        /* شاشة النتيجة المخفية */
+        #secret-content {
+            display: none;
+            text-align: center;
+        }
+        .connection-tag {
+            font-size: 0.8rem;
+            color: #00aa44;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .decrypted-file {
+            font-size: 0.8rem;
+            color: #00aa44;
+            margin-bottom: 20px;
+        }
+        .neon-title {
+            font-size: 2rem;
+            color: #00ff66;
+            text-shadow: 0 0 12px rgba(0,255,102,0.8);
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+        .logs-box {
+            border: 1px solid #00aa44;
+            padding: 12px;
+            text-align: right;
+            font-size: 0.8rem;
+            background: #050b05;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #00cc55;
+        }
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #00aa44;
+            border-top: 1px dashed #00aa44;
+            padding-top: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-box">
+        <!-- الهيدر -->
+        <div class="header-info">
+            <div class="dots"><span>● ● ●</span> TERMINAL SESSION</div>
+            <div>ENCRYPTED // 07</div>
+        </div>
+
+        <!-- شاشة تسجيل الدخول (الباسورد) -->
+        <div id="login-screen">
+            <h1>منظومة أسامة حامد</h1>
+            <div class="subtitle">OSAMA HAMED // SECURE ACCESS</div>
+            
+            <div class="input-group">
+                <input type="text" id="passwordInput" placeholder="[ أدخل كلمة السر للمتابعة ]">
+            </div>
+            <button class="btn" onclick="checkPassword()">AUTHORIZE</button>
+            <div id="error-msg">ACCESS DENIED // كلمة السر غير صحيحة</div>
+        </div>
+
+        <!-- المحتوى اللي بيظهر بعد ما يكتب الباسورد صح -->
+        <div id="secret-content">
+            <div class="connection-tag">[ CONNECTION ESTABLISHED ]</div>
+            <div class="decrypted-file">MESSAGE_DECRYPTED.exe</div>
+            
+            <div class="neon-title">
+                أسامة حامد<br>
+                <span>بيحبك</span>
+            </div>
+
+            <div class="logs-box">
+                <div>> decrypting message...</div>
+                <div>> sender: OSAMA HAMED</div>
+                <div>> status: <span style="color:#00ff66;">LOVE CONFIRMED ✓</span></div>
+            </div>
+
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">تم فك التشفير بنجاح ❤️</p>
+            
+            <div class="footer-note">
+                <span>END OF TRANSMISSION _</span>
+                <span>صنع بواسطة أسامة حامد</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const val = document.getElementById('passwordInput').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const loginScreen = document.getElementById('login-screen');
+            const secretContent = document.getElementById('secret-content');
+
+            // يقبل الكلمة سواء بالهمزة أو بدونها
+            if (val === "اسامه حامد" || val === "أسامة حامد") {
+                loginScreen.style.display = 'none';
+                secretContent.style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
